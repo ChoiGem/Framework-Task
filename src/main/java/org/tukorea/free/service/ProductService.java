@@ -4,6 +4,9 @@ import java.util.List;
 import org.tukorea.free.domain.ProductDTO;
 
 public interface ProductService {
-	List<ProductDTO> getAllProducts();
-    ProductDTO getProductById(String id);
+	// 상품 전체 조회
+	public List<ProductDTO> getAllProducts();
+	
+	// 상품 상세 조회
+	public ProductDTO getProductById(String id);
 }
