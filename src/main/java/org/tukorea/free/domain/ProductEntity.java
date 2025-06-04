@@ -23,7 +23,7 @@ public class ProductEntity {
     @Id
     private String id;
 
-    @Column(nullable = false)
+    @Column(name = "product_name", nullable = false)
     private String name;
 
     @Column(nullable = false)

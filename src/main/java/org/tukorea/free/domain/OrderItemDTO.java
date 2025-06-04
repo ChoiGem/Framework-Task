@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderItemDTO {
-
     private String id;
     private String orderId;
     private String productId;

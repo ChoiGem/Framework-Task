@@ -23,7 +23,7 @@ public class UserEntity {
     @Id
     private String id;
 
-    @Column(nullable = false)
+    @Column(name = "user_name", nullable = false)
     private String name;
 
     @Column(nullable = false)
@@ -31,7 +31,4 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String address;
-
-    @Column
-    private String memo;
 }

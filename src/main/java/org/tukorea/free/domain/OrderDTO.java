@@ -14,9 +14,12 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDTO {
-
-    private String id;
+	private String id;
     private String userId;
+    private String userName;
+    private String email;
+    private String address;
+    private String memo;
     private String orderDate;
     private String totalPrice;
 
@@ -24,6 +27,10 @@ public class OrderDTO {
         return OrderDTO.builder()
                 .id(entity.getId())
                 .userId(entity.getUserId())
+                .userName(entity.getUserName())
+                .email(entity.getEmail())
+                .address(entity.getAddress())
+                .memo(entity.getMemo())
                 .orderDate(entity.getOrderDate())
                 .totalPrice(entity.getTotalPrice())
                 .build();
@@ -33,6 +40,10 @@ public class OrderDTO {
         return OrderEntity.builder()
                 .id(dto.getId())
                 .userId(dto.getUserId())
+                .userName(dto.getUserName())
+                .email(dto.getEmail())
+                .address(dto.getAddress())
+                .memo(dto.getMemo())
                 .orderDate(dto.getOrderDate())
                 .totalPrice(dto.getTotalPrice())
                 .build();

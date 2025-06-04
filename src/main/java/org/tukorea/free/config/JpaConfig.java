@@ -16,8 +16,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
-@EnableAspectJAutoProxy
 @EnableTransactionManagement
+@EnableAspectJAutoProxy
 @EnableJpaRepositories(basePackages = "org.tukorea.free.persistence")
 public class JpaConfig {
     @Bean
@@ -26,7 +26,7 @@ public class JpaConfig {
         dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/springdb?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUsername("spring");
-        dataSource.setPassword("1234");
+        dataSource.setPassword("passwd");
         dataSource.setMaxTotal(5);
         return dataSource;
     }

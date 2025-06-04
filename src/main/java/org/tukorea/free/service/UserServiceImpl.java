@@ -15,15 +15,16 @@ public class UserServiceImpl implements UserService {
 		return userRepository.existsById(id);
 	}
     
-    // 주문자 저장
-	public void saveUser(UserDTO userDTO) {
-		if (!userRepository.existsById(userDTO.getId())) {
-            userRepository.save(UserDTO.toEntity(userDTO));
-        }
+    // 주문자 저장/수정
+	public void updateUser(UserDTO userDTO) {
+		// 존재 여부와 무관하게 덮어쓰기
+	    userRepository.save(UserDTO.toEntity(userDTO));
 	}
     
     // 주문자 불러오기
 	public UserDTO getUserById(String id) {
 		return userRepository.findById(id).map(UserDTO::toDTO).orElse(null);
 	}
+	
+
 }

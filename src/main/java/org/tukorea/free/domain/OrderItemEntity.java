@@ -20,9 +20,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "order_item_free")
 public class OrderItemEntity {
-
     @Id
-    @Column(nullable = false)
     private String id;
 
     @Column(name = "order_id", nullable = false)

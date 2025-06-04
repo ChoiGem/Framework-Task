@@ -18,7 +18,6 @@ public class UserDTO {
     private String name;
     private String email;
     private String address;
-    private String memo;
 
     public static UserDTO toDTO(UserEntity entity) {
         return UserDTO.builder()
@@ -26,7 +25,6 @@ public class UserDTO {
                 .name(entity.getName())
                 .email(entity.getEmail())
                 .address(entity.getAddress())
-                .memo(entity.getMemo())
                 .build();
     }
 
@@ -36,7 +34,6 @@ public class UserDTO {
                 .name(dto.getName())
                 .email(dto.getEmail())
                 .address(dto.getAddress())
-                .memo(dto.getMemo())
                 .build();
     }
 }

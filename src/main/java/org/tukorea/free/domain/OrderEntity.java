@@ -20,13 +20,23 @@ import lombok.ToString;
 @Entity
 @Table(name = "order_free")
 public class OrderEntity {
-
     @Id
-    @Column(nullable = false)
     private String id;  // 주문 ID
 
     @Column(name = "user_id", nullable = false)
     private String userId;
+
+    @Column(name = "user_name", nullable = false)
+    private String userName;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String address;
+
+    @Column
+    private String memo;
 
     @Column(name = "order_date", nullable = false)
     private String orderDate;

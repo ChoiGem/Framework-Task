@@ -9,7 +9,6 @@ import org.tukorea.free.domain.ProductEntity;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, String> {
-
     List<ProductEntity> findAll();
     Optional<ProductEntity> findById(String id);
     List<ProductEntity> findByNameContaining(String keyword); // optional

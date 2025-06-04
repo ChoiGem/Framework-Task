@@ -8,7 +8,6 @@ import org.tukorea.free.domain.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String> {
-
     Optional<UserEntity> findById(String id);
     boolean existsById(String id);
     UserEntity save(UserEntity entity);
