@@ -13,7 +13,7 @@ public class OrderItemServiceImpl implements OrderItemService {
 	@Autowired
     private OrderItemRepository orderItemRepository;
 	
-	public List<OrderItemDTO> getItemsByOrderId(String orderId) {
+	public List<OrderItemDTO> getItemsByOrderId(Integer orderId) {
         return orderItemRepository.findByOrderId(orderId).stream().map(OrderItemDTO::toDTO).collect(Collectors.toList());
     }
 }

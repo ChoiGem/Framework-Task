@@ -10,6 +10,6 @@ import org.tukorea.free.domain.OrderEntity;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, String> {
     List<OrderEntity> findByUserId(String userId);
-    Optional<OrderEntity> findById(String id);
+    Optional<OrderEntity> findById(Integer id);
     OrderEntity save(OrderEntity entity);
 }

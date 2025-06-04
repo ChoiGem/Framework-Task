@@ -22,12 +22,13 @@ import lombok.ToString;
 @Entity
 @Table(name = "order_item_free")
 public class OrderItemEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)   // ★ AUTO_INCREMENT
+    private Integer id;
 
     @Column(name = "order_id", nullable = false)
-    private int orderId;
+    private Integer orderId;          // FK만 숫자 값으로 들고 가도 OK
 
     @Column(name = "product_id", nullable = false)
     private String productId;
@@ -36,5 +37,5 @@ public class OrderItemEntity {
     private String quantity;
 
     @Column(nullable = false)
-    private String price;  // 주문 당시 단가
+    private String price;             // 주문 당시 단가
 }

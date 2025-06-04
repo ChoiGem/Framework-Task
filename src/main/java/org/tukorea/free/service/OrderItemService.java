@@ -5,5 +5,5 @@ import org.tukorea.free.domain.OrderItemDTO;
 
 public interface OrderItemService {
 	// 주문 상세 조회
-	public List<OrderItemDTO> getItemsByOrderId(String orderId);
+	public List<OrderItemDTO> getItemsByOrderId(Integer orderId);
 }

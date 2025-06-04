@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <title>#Shop - 주문 목록</title>
@@ -31,7 +32,7 @@
 							<div>요청사항: ${order.memo}</div>
 							<div>날짜: ${order.orderDate}</div>
 						</div>
-						<div class="order-price">${order.totalPrice}원</div>
+						<div class="order-price"><span><fmt:formatNumber value="${order.totalPrice}" type="number" /></span>원</div>
 					</div>
 				</c:forEach>
 			</c:otherwise>

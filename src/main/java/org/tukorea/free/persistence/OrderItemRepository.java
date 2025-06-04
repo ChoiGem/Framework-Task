@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.tukorea.free.domain.OrderItemEntity;
 
 @Repository
-public interface OrderItemRepository extends JpaRepository<OrderItemEntity, String> {
-    List<OrderItemEntity> findByOrderId(String orderId);
+public interface OrderItemRepository extends JpaRepository<OrderItemEntity, Integer> {
+    List<OrderItemEntity> findByOrderId(Integer orderId);
     OrderItemEntity save(OrderItemEntity entity);
 }

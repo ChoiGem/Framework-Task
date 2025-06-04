@@ -46,7 +46,7 @@
 
         <div class="form-row">
             <label>요청사항</label>
-            <input type="text" name="request">
+            <input type="text" name="memo">
         </div>
 
         <div class="submit-box">

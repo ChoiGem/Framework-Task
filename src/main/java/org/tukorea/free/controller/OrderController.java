@@ -2,6 +2,8 @@ package org.tukorea.free.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,37 +46,46 @@ public class OrderController {
 
 	// 주문 처리
 	@PostMapping("/submit")
-	public String submitOrder(@ModelAttribute OrderDTO orderDTO, @RequestParam("productIds") String productIds, 
-			@RequestParam("quantities") String quantities, Model model) {
-		// 사용자 정보 추가 or 갱신
-		userService.updateUser(UserDTO.builder().id(orderDTO.getUserId()).name(orderDTO.getUserName())
-				.email(orderDTO.getEmail()).address(orderDTO.getAddress()).build());
+    public void submitOrder(@ModelAttribute OrderDTO orderDTO, @RequestParam("productIds") String productIds,
+    		@RequestParam("quantities") String quantities, HttpServletRequest  request,
+            HttpServletResponse response) throws IOException {
 
-		// 상품 ID 및 수량 배열로부터 OrderItemDTO 리스트 생성
-		String[] idArray = productIds.split(",");
-		String[] qtyArray = quantities.split(",");
+        // 필수값 추가
+        if (orderDTO.getOrderDate() == null) {
+            String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            orderDTO.setOrderDate(now);
+        }
 
-		List<OrderItemDTO> itemList = new ArrayList<>();
+        // 사용자 정보 update
+        userService.updateUser(UserDTO.builder().id(orderDTO.getUserId()).name(orderDTO.getUserName())
+        		.email(orderDTO.getEmail()).address(orderDTO.getAddress()).build());
 
-		for (int i = 0; i < idArray.length; i++) {
-			String productId = idArray[i];
-			String quantity = qtyArray[i];
+        // 주문 아이템 DTO 리스트 작성
+        String[] idArr  = productIds.split(",");
+        String[] qtyArr = quantities.split(",");
 
-			// 주문 당시 상품 가격을 가져옴
-			ProductDTO product = productService.getProductById(productId);
-			String price = product.getPrice();
+        List<OrderItemDTO> itemList = new ArrayList<>();
+        for (int i = 0; i < idArr.length; i++) {
+            ProductDTO p = productService.getProductById(idArr[i]);
 
-			OrderItemDTO item = OrderItemDTO.builder()
-					.orderId(orderDTO.getId()).productId(productId).quantity(quantity).price(price).build();
+            itemList.add(OrderItemDTO.builder().productId(idArr[i]).quantity(qtyArr[i]).price(p.getPrice()).build());
+        }
 
-			itemList.add(item);
-		}
-		// OrderService에 주문 + 주문아이템 저장 위임
-		orderService.placeOrder(orderDTO, itemList);
+        // 주문 저장 & PK 획득
+        Integer newOrderId = orderService.placeOrder(orderDTO, itemList);
 
-		model.addAttribute("orderId", orderDTO.getId());
-		return "orderResult";
-	}
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        String ctx = request.getContextPath();
+        String home = ctx + "/"; // 이동할 주소
+
+        out.println("<script>");
+        out.println("alert('주문이 완료되었습니다.');");
+        out.println("location.href='" + home + "';");
+        out.println("</script>");
+        out.flush();
+    }
 
 	// 주문 검색 폼
 	@GetMapping("/search")

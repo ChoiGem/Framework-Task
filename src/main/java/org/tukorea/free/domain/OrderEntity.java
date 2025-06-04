@@ -22,9 +22,10 @@ import lombok.ToString;
 @Entity
 @Table(name = "order_free")
 public class OrderEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;  // 주문 ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)   // ★ AUTO_INCREMENT 매핑
+    private Integer id;
 
     @Column(name = "user_id", nullable = false)
     private String userId;
@@ -32,13 +33,12 @@ public class OrderEntity {
     @Column(name = "user_name", nullable = false)
     private String userName;
 
-    @Column(nullable = false)
+    @Column                      // ← DB도 NULL 허용이므로 nullable = true 가 기본
     private String email;
 
     @Column(nullable = false)
     private String address;
 
-    @Column
     private String memo;
 
     @Column(name = "order_date", nullable = false)
