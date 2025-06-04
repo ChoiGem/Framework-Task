@@ -1,5 +1,7 @@
 package org.tukorea.free.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,9 @@ import org.tukorea.free.service.OrderService;
 import org.tukorea.free.service.ProductService;
 import org.tukorea.free.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("/order")
 public class OrderController {
@@ -31,16 +36,16 @@ public class OrderController {
 
 	// 주문자 정보 입력 폼
 	@GetMapping("/form")
-	public String showOrderForm(@RequestParam String totalPrice, @RequestParam String productIds, Model model) {
-		model.addAttribute("totalPrice", totalPrice);
-		model.addAttribute("productIds", productIds);
-		return "orderForm";
-	}
+    public String showOrderForm(@RequestParam("totalPrice") String totalPrice, @RequestParam("productIds") String productIds, Model model) {
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("productIds", productIds);
+        return "orderForm";
+    }
 
 	// 주문 처리
 	@PostMapping("/submit")
-	public String submitOrder(@ModelAttribute OrderDTO orderDTO, @RequestParam String productIds,
-			@RequestParam String quantities, Model model) {
+	public String submitOrder(@ModelAttribute OrderDTO orderDTO, @RequestParam("productIds") String productIds, 
+			@RequestParam("quantities") String quantities, Model model) {
 		// 사용자 정보 추가 or 갱신
 		userService.updateUser(UserDTO.builder().id(orderDTO.getUserId()).name(orderDTO.getUserName())
 				.email(orderDTO.getEmail()).address(orderDTO.getAddress()).build());
@@ -59,7 +64,7 @@ public class OrderController {
 			ProductDTO product = productService.getProductById(productId);
 			String price = product.getPrice();
 
-			OrderItemDTO item = OrderItemDTO.builder().id("oi" + System.currentTimeMillis() + i) // 간단한 고유 ID
+			OrderItemDTO item = OrderItemDTO.builder()
 					.orderId(orderDTO.getId()).productId(productId).quantity(quantity).price(price).build();
 
 			itemList.add(item);
@@ -79,9 +84,21 @@ public class OrderController {
 
 	// 주문 내역 출력
 	@PostMapping("/list")
-	public String showOrders(@RequestParam String userId, Model model) {
-		List<OrderDTO> orderList = orderService.getOrdersByUserId(userId);
-		model.addAttribute("orderList", orderList);
-		return "orderList";
+	public String showOrders(@RequestParam("userId") String userId, Model model,
+	                         HttpServletResponse response, HttpServletRequest request) throws IOException {
+	    List<OrderDTO> orderList = orderService.getOrdersByUserId(userId);
+
+	    if (orderList.isEmpty()) {
+	        response.setContentType("text/html; charset=UTF-8");
+	        PrintWriter out = response.getWriter();
+	        String contextPath = request.getContextPath(); // 여기 추가!
+	        out.println("<script>alert('해당 ID로 주문한 내역이 없습니다.'); location.href='" + contextPath + "/order/search';</script>");
+	        out.flush();
+	        return null;
+	    }
+
+	    model.addAttribute("orderList", orderList);
+	    return "orderList";
 	}
+
 }

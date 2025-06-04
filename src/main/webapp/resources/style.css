@@ -1,0 +1,268 @@
+/* === 공통 === */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+/* === 헤더 === */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    font-size: 32px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.logo {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+/* === 홈 화면: 상품 목록 === */
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 30px;
+}
+
+.product-card {
+    border: 2px solid #003;
+    width: 200px;
+    padding: 15px;
+    margin: 15px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.product-image {
+    height: 100px;
+    background: #eee;
+    margin-bottom: 10px;
+}
+
+/* === 장바구니 바로가기 버튼 === */
+.cart-button {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    padding: 10px 20px;
+    background: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.cart-button:hover {
+    background-color: #eee;
+}
+
+/* === 장바구니 화면 === */
+#cart-list {
+    padding: 20px 40px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #003;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+.order-item .product-name {
+    flex: 2;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.order-item > div {
+    flex: 1;
+    text-align: center;
+}
+
+/* === 수량 조절 버튼 === */
+.order-item button {
+    font-size: 18px;
+    padding: 4px 10px;
+    margin: 0 5px;
+    border: 1px solid #aaa;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.order-item button:hover {
+    background-color: #eee;
+}
+
+/* === 총합 및 주문 버튼 === */
+.order-total {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 30px 40px 0 0;
+}
+
+.order-button {
+    display: block;
+    margin: 30px auto;
+    padding: 12px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.order-button:hover {
+    background-color: #eee;
+}
+
+/* === 주문 검색 화면 === */
+.search-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.search-container h2 {
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-form input[type="text"] {
+    padding: 10px 15px;
+    font-size: 16px;
+    width: 240px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.search-form button {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.search-form button:hover {
+    background-color: #eee;
+}
+
+/* === 주문 목록 화면 === */
+.order-list-container {
+    padding: 30px 40px;
+}
+
+.order-list-container h2 {
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.order-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #003;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    background-color: #fdfdfd;
+}
+
+.order-image {
+    width: 120px;
+    height: 100px;
+    background-color: #eee;
+    text-align: center;
+    line-height: 100px;
+    font-size: 14px;
+}
+
+.order-info {
+    flex: 1;
+    padding: 0 20px;
+    font-size: 15px;
+}
+
+.order-price {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    width: 120px;
+}
+
+.no-order {
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.product-name {
+    font-weight: bold;
+    font-size: 18px;
+    color: #000; /* 글자색 명시 */
+    margin-bottom: 5px;
+}
+
+.stock, .qty, .subtotal {
+    font-size: 16px;
+    margin-top: 6px;
+    display: inline-block;
+    min-width: 80px;
+    color: #333;
+}
+
+.order-item .stock {
+    font-size: 14px;
+    color: #666;
+}
+
+/* ───── 주문 폼 전용 ───── */
+.order-wrapper       { max-width:650px; margin:60px auto 80px; padding:0 20px; }
+.order-total         { font-size:30px; font-weight:700; margin-bottom:50px; }
+
+.order-form .form-row{ display:flex; align-items:center; gap:25px; margin-bottom:35px; }
+.order-form label    { width:140px; font-size:24px; font-weight:700; }
+.order-form input[type=text],
+.order-form input[type=email]{
+    flex:1; font-size:20px; padding:12px 14px;
+    border:3px solid #001b2e; border-radius:6px;
+}
+
+.required-star       { color:#e22; font-weight:700; margin-left:2px; }
+
+.submit-box          { text-align:right; margin-top:60px; }
+.submit-box button   {
+    font-size:20px; padding:12px 34px;
+    border:3px solid #001b2e; background:#fff;
+    cursor:pointer; border-radius:8px;
+}
+.submit-box button:hover{ background:#001b2e; color:#fff; }

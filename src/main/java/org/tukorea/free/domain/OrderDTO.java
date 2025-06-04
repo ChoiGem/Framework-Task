@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDTO {
-	private String id;
+	private int id;
     private String userId;
     private String userName;
     private String email;

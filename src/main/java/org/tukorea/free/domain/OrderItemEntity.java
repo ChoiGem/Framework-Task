@@ -2,6 +2,8 @@ package org.tukorea.free.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,10 +23,11 @@ import lombok.ToString;
 @Table(name = "order_item_free")
 public class OrderItemEntity {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "order_id", nullable = false)
-    private String orderId;
+    private int orderId;
 
     @Column(name = "product_id", nullable = false)
     private String productId;
